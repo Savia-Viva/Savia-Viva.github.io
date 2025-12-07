@@ -20,15 +20,24 @@
 
     <style>
         :root {
-            --cream: #F5F0E8;
-            --cream-light: #FAF7F2;
-            --brown-dark: #2D1810;
-            --brown-medium: #5D4037;
-            --brown-light: #8B7355;
-            --gold: #C4A35A;
-            --gold-light: #D4B96A;
-            --green-dark: #2E5233;
-            --green-light: #4A7C4E;
+            --cream: #EFEBE9;
+            /* Ultra-light warm grey/cream */
+            --latte-base: #D7CCC8;
+            /* Base coffee-milk color */
+            --cream-light: #F5F5F5;
+            /* Milk Foam - Cards */
+            --brown-dark: #3E2723;
+            /* Espresso - Main Text */
+            --brown-medium: #4E342E;
+            /* Mocha - Secondary Text - Darkened for better contrast */
+            --brown-light: #795548;
+            /* Cocoa - Accents - Darkened */
+            --gold: #A67C52;
+            /* Caramel/Gold - Darkened for better contrast on light backgrounds */
+
+            /* Replaced Colors Mapped */
+            --green-dark: #3E2723;
+            /* Mapped to Espresso */
         }
 
         * {
@@ -39,9 +48,18 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--cream);
+            background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+                url('Images/imag9.webp'),
+                radial-gradient(circle at 50% 0%, #EFEBE9 0%, #D7CCC8 60%, #A1887F 100%);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center top, center top, center top;
+            background-size: cover, 100% auto, cover;
+            background-attachment: fixed, scroll, fixed;
             color: var(--brown-dark);
-            line-height: 1.7;
+            line-height: 1.8;
+            /* Increased line height */
+            font-size: 1.05rem;
+            /* Increased base font size */
             scroll-behavior: smooth;
             position: relative;
             /* For absolute positioning of side panels */
@@ -51,12 +69,22 @@
             font-family: 'Cormorant Garamond', serif;
         }
 
+        /* Fix Blue Hyperlinks Globally */
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--brown-light);
+        }
+
         /* Navigation */
         .navbar {
             position: fixed;
             top: 0;
-            left: 300px;
-            /* Shifted for wider side panel */
+            left: 0;
             right: 0;
             z-index: 1000;
             padding: 1rem 2rem;
@@ -64,15 +92,15 @@
             justify-content: space-between;
             align-items: center;
             transition: all 0.4s ease;
-            width: calc(100% - 300px);
-            /* Adjust width */
+            width: 100%;
         }
 
         .navbar.scrolled {
-            background: rgba(245, 240, 232, 0.98);
+            background: rgba(245, 235, 224, 0.95);
             backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 30px rgba(62, 39, 35, 0.08);
             padding: 0.75rem 2rem;
+            border-bottom: 1px solid rgba(166, 123, 91, 0.1);
         }
 
         .nav-logo {
@@ -99,6 +127,7 @@
             font-weight: 600;
             color: var(--brown-dark);
             letter-spacing: 0.05em;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
         }
 
         .nav-links {
@@ -149,8 +178,64 @@
         }
 
         .nav-icons a:hover {
-            color: var(--gold);
+            color: var(--brown-light);
             transform: translateY(-2px);
+        }
+
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced Hover Effects */
+        .hero-btn,
+        .modal-btn,
+        .form-btn,
+        .add-cart-btn {
+            background: linear-gradient(135deg, var(--brown-dark), var(--brown-medium));
+            color: var(--cream);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(62, 39, 35, 0.2);
+            z-index: 1;
+        }
+
+        .hero-btn::after,
+        .modal-btn::after,
+        .form-btn::after,
+        .add-cart-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .hero-btn:hover::after,
+        .modal-btn:hover::after,
+        .form-btn:hover::after,
+        .add-cart-btn:hover::after {
+            width: 100%;
         }
 
         /* Hero Section */
@@ -160,9 +245,22 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            background: var(--cream-light);
+            background: transparent;
             overflow: hidden;
             padding: 6rem 2rem 4rem;
+            z-index: 1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(26, 46, 27, 0.4) 100%);
+            pointer-events: none;
+            z-index: 2;
         }
 
         .hero-decoration {
@@ -200,16 +298,25 @@
 
         .hero-content {
             position: relative;
-            z-index: 10;
+            z-index: 2;
             text-align: center;
             max-width: 900px;
+            /* Increased width */
+            padding: 4rem;
+            /* Increased padding */
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(62, 39, 35, 0.1);
         }
 
         .hero-logo {
             width: 280px;
             height: 280px;
             border-radius: 50%;
-            object-fit: cover;
+            object-fit: contain;
+            /* Ensure full logo visibility */
             margin-bottom: 2rem;
             box-shadow:
                 0 25px 60px rgba(45, 24, 16, 0.25),
@@ -233,10 +340,12 @@
         .hero-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: 4.5rem;
-            font-weight: 600;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.1;
             color: var(--brown-dark);
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.15em;
+            font-style: italic;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
         }
 
         .hero-subtitle {
@@ -259,17 +368,7 @@
 
         .hero-btn {
             display: inline-block;
-            padding: 1rem 3rem;
-            background: var(--brown-dark);
-            color: var(--cream);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            border-radius: 50px;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 30px rgba(45, 24, 16, 0.2);
+            /* The new button style is applied above, this is for specific display */
         }
 
         .hero-btn:hover {
@@ -316,7 +415,9 @@
         /* About Section */
         .about {
             padding: 8rem 2rem;
-            background: var(--cream);
+            background: transparent;
+            position: relative;
+            z-index: 1;
         }
 
         .container {
@@ -340,9 +441,13 @@
 
         .section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--brown-dark);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            font-style: italic;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
         }
 
         .section-divider {
@@ -366,9 +471,12 @@
         .about-image img {
             width: 100%;
             height: 500px;
-            object-fit: cover;
+            object-fit: contain;
+            /* Ensure full image visibility */
             border-radius: 20px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            background: rgba(0, 0, 0, 0.2);
+            /* Frame for empty space */
         }
 
         .about-image::before {
@@ -381,6 +489,26 @@
             border: 3px solid var(--gold);
             border-radius: 20px;
             z-index: -1;
+        }
+
+        .contact-info {
+            background: rgba(255, 250, 245, 0.95);
+            padding: 3rem;
+            border-radius: 40px;
+            /* Softer corners */
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 20px 50px rgba(62, 39, 35, 0.08);
+        }
+
+        .about-content {
+            background: rgba(255, 250, 245, 0.95);
+            padding: 3rem;
+            border-radius: 40px;
+            /* Softer corners */
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 20px 50px rgba(62, 39, 35, 0.08);
         }
 
         .about-content h3 {
@@ -427,7 +555,10 @@
         /* Cacao Varieties Selector */
         .varieties {
             padding: 8rem 2rem;
-            background: linear-gradient(180deg, var(--cream-light) 0%, var(--cream) 100%);
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 1;
         }
 
         .varieties-grid {
@@ -438,13 +569,15 @@
         }
 
         .variety-card {
-            background: white;
-            border-radius: 20px;
+            background: rgba(255, 250, 245, 0.95);
+            border-radius: 40px;
+            /* Softer corners */
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 15px 35px rgba(62, 39, 35, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
-            transition: all 0.4s ease;
             position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
         .variety-card:hover {
@@ -457,18 +590,22 @@
         }
 
         .variety-image {
-            height: 180px;
+            height: 300px;
+            /* Increased height */
             overflow: hidden;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Removed background overlay */
         }
 
         .variety-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            mix-blend-mode: multiply;
-            filter: brightness(1.08) contrast(1.05);
-            display: block;
+            /* Crop to show fruit bigger */
+            /* Removed mix-blend-mode and filter */
             transition: transform 0.5s ease;
         }
 
@@ -532,7 +669,8 @@
         }
 
         .modal-content {
-            background: var(--cream-light);
+            background: var(--cream);
+            border: 1px solid var(--gold);
             border-radius: 30px;
             max-width: 900px;
             width: 100%;
@@ -589,8 +727,11 @@
         .modal-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            /* Ensure full image visibility */
             border-radius: 30px 0 0 30px;
+            background: var(--cream);
+            /* Match modal background */
         }
 
         .modal-details {
@@ -639,7 +780,7 @@
         }
 
         .char-item {
-            background: white;
+            background: rgba(255, 255, 255, 0.1);
             padding: 1rem;
             border-radius: 12px;
             text-align: center;
@@ -688,23 +829,12 @@
 
         .modal-btn {
             display: inline-block;
-            padding: 1rem 2rem;
-            background: var(--gold);
-            color: var(--brown-dark);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            /* The new button style is applied above, this is for specific display */
         }
 
         .modal-btn:hover {
-            background: var(--brown-dark);
-            color: var(--cream);
+            background: var(--gold);
+            color: var(--brown-dark);
         }
 
         @media (max-width: 768px) {
@@ -742,7 +872,7 @@
         /* Mission Section */
         .mission {
             padding: 8rem 2rem;
-            background: var(--brown-dark);
+            background: rgba(93, 58, 38, 0.95);
             color: var(--cream);
             position: relative;
             overflow: hidden;
@@ -755,7 +885,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('montana_Cacao.jpg') center/cover;
+            background: url('Images/montana_Cacao.webp') center/cover;
             opacity: 0.1;
         }
 
@@ -765,6 +895,11 @@
             max-width: 900px;
             margin: 0 auto;
             text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .mission .section-title {
@@ -795,10 +930,124 @@
             color: var(--gold);
         }
 
+        /* New Content Styles - Minimalist */
+        .phases-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .phase-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(62, 39, 35, 0.03);
+        }
+
+        .phase-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 15px 30px rgba(62, 39, 35, 0.08);
+        }
+
+        .phase-icon {
+            font-size: 1.8rem;
+            color: var(--brown-light);
+            margin-bottom: 0.8rem;
+        }
+
+        .phase-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--cream);
+            margin-bottom: 0.3rem;
+        }
+
+        .phase-desc {
+            font-size: 0.95rem;
+            color: var(--brown-medium);
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        .mission-paths {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .path-card {
+            background: transparent;
+            padding: 0;
+            border: none;
+            text-align: center;
+            position: relative;
+        }
+
+        .path-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 1px;
+            background: var(--brown-light);
+            opacity: 0.5;
+            transition: width 0.3s ease;
+        }
+
+        .path-card:hover::before {
+            width: 80px;
+            opacity: 1;
+        }
+
+        .path-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--cream-dark);
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        .path-card p {
+            font-size: 0.95rem;
+            color: rgba(245, 240, 232, 0.8);
+            font-weight: 300;
+        }
+
+        .mission-conclusion {
+            font-size: 1.1rem;
+            color: rgba(245, 240, 232, 0.9);
+            margin-top: 3rem;
+            line-height: 1.8;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mission-conclusion strong {
+            color: var(--cream-dark);
+            font-size: 1.3rem;
+            font-family: 'Cormorant Garamond', serif;
+            display: block;
+            margin-top: 1.5rem;
+            font-weight: 600;
+        }
+
         /* Products Section */
         .products {
             padding: 8rem 2rem;
-            background: var(--cream-light);
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 1;
         }
 
         .products-grid {
@@ -808,12 +1057,26 @@
             margin-top: 3rem;
         }
 
-        .product-card {
-            background: white;
-            border-radius: 20px;
+        .about-image {
+            position: relative;
+            height: 500px;
+            /* Increased height */
+            border-radius: 30px;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s ease;
+            box-shadow: 0 20px 40px rgba(62, 39, 35, 0.1);
+            background: transparent;
+            /* Removed overlay */
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .product-card {
+            background: rgba(255, 250, 245, 0.8);
+            border-radius: 40px;
+            /* Softer corners */
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(62, 39, 35, 0.08);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
         .product-card:hover {
@@ -823,18 +1086,22 @@
 
         .product-image {
             position: relative;
-            height: 300px;
+            height: 350px;
+            /* Increased height */
             overflow: hidden;
+            background: transparent;
+            /* Removed overlay */
         }
 
         .product-image img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            mix-blend-mode: multiply;
-            filter: brightness(1.08) contrast(1.05);
+            /* Removed mix-blend-mode and filter */
             display: block;
             transition: transform 0.5s ease;
+            padding: 1rem;
+            /* Add padding to prevent cut-off */
         }
 
         .product-card:hover .product-image img {
@@ -872,6 +1139,7 @@
             font-size: 1.5rem;
             color: var(--brown-dark);
             margin-bottom: 0.5rem;
+            text-align: center;
         }
 
         .product-description {
@@ -915,7 +1183,10 @@
         /* Process Section */
         .process {
             padding: 8rem 2rem;
-            background: var(--cream);
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 1;
         }
 
         .process-timeline {
@@ -942,8 +1213,10 @@
         }
 
         .process-icon {
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            /* Increased size */
+            height: 150px;
+            /* Increased size */
             border-radius: 50%;
             margin: 0 auto 1.5rem;
             overflow: hidden;
@@ -951,7 +1224,7 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
             position: relative;
             z-index: 2;
-            background: white;
+            background: var(--cream-light);
         }
 
         .process-icon img {
@@ -983,6 +1256,7 @@
             font-size: 1.4rem;
             color: var(--brown-dark);
             margin-bottom: 0.5rem;
+            text-align: center;
         }
 
         .process-desc {
@@ -993,8 +1267,11 @@
         /* Impact Section */
         .impact {
             padding: 8rem 2rem;
-            background: linear-gradient(135deg, var(--green-dark), var(--brown-dark));
-            color: var(--cream);
+            background: rgba(46, 82, 51, 0.9);
+            /* Green overlay */
+            color: #FFFFFF;
+            position: relative;
+            z-index: 1;
         }
 
         .impact-grid {
@@ -1006,7 +1283,8 @@
 
         .impact-image img {
             width: 100%;
-            height: 450px;
+            height: 550px;
+            /* Increased height */
             object-fit: cover;
             border-radius: 20px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
@@ -1016,16 +1294,28 @@
             padding: 2rem;
         }
 
+        .impact-content .section-label {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            display: block;
+        }
+
         .impact-content .section-title {
             color: var(--cream);
-            text-align: left;
+            text-align: center;
         }
 
         .impact-content p {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
+            /* Increased font size */
             margin: 1.5rem 0;
-            line-height: 1.8;
-            color: rgba(245, 240, 232, 0.85);
+            line-height: 1.9;
+            color: var(--cream);
+            /* Ensure high contrast */
         }
 
         .impact-list {
@@ -1049,7 +1339,10 @@
         /* Contact Section */
         .contact {
             padding: 8rem 2rem;
-            background: var(--cream-light);
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 1;
         }
 
         .contact-wrapper {
@@ -1063,15 +1356,23 @@
             font-size: 2rem;
             color: var(--brown-dark);
             margin-bottom: 1rem;
+            text-align: center;
         }
 
         .contact-info p {
             color: var(--brown-medium);
             margin-bottom: 2rem;
+            text-align: center;
         }
 
         .contact-details {
             margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .contact-item {
@@ -1096,6 +1397,7 @@
             display: flex;
             gap: 1rem;
             margin-top: 2rem;
+            justify-content: center;
         }
 
         .contact-social a {
@@ -1117,10 +1419,12 @@
         }
 
         .contact-form {
-            background: white;
+            background: rgba(255, 250, 245, 0.95);
             padding: 3rem;
-            border-radius: 20px;
+            border-radius: 40px;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
         .form-group {
@@ -1161,17 +1465,7 @@
 
         .form-btn {
             width: 100%;
-            padding: 1rem;
-            background: var(--brown-dark);
-            color: var(--cream);
-            border: none;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            /* The new button style is applied above, this is for specific width */
         }
 
         .form-btn:hover {
@@ -1213,6 +1507,7 @@
             font-size: 1.3rem;
             margin-bottom: 1.5rem;
             color: var(--gold);
+            text-align: center;
         }
 
         .footer-links {
@@ -1335,6 +1630,19 @@
                 font-size: 2.2rem;
             }
 
+            .hero {
+                padding: 6rem 1.5rem 4rem;
+            }
+
+            .about,
+            .products,
+            .process,
+            .mission,
+            .impact,
+            .contact {
+                padding: 4rem 1.5rem;
+            }
+
             .footer-content {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -1353,6 +1661,8 @@
             color: var(--cream);
             padding: 4rem 2rem 2rem;
             margin-top: 4rem;
+            position: relative;
+            z-index: 10;
         }
 
         .footer-content {
@@ -1369,6 +1679,7 @@
             font-size: 2rem;
             color: var(--gold);
             margin-bottom: 1rem;
+            text-align: center;
         }
 
         .footer-links h4,
@@ -1377,6 +1688,7 @@
             font-size: 1.5rem;
             color: var(--gold);
             margin-bottom: 1.5rem;
+            text-align: center;
         }
 
         .footer-links ul {
@@ -1542,12 +1854,14 @@
         .video-section {
             padding: 8rem 2rem;
             background: var(--brown-dark);
+            /* Deep Espresso */
             color: var(--cream);
         }
 
         .video-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 2rem;
             margin-top: 3rem;
         }
@@ -1558,6 +1872,8 @@
             overflow: hidden;
             transition: all 0.4s ease;
             border: 1px solid rgba(196, 163, 90, 0.2);
+            width: calc(50% - 1rem);
+            /* Ensure 2 fit per row with gap */
         }
 
         .video-card:hover {
@@ -1598,6 +1914,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.2rem;
             color: var(--gold);
+            text-align: center;
             margin-bottom: 0.5rem;
         }
 
@@ -1607,34 +1924,13 @@
             }
         }
 
-        /* Side Panel */
-        .side-panel {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            width: 300px;
-            z-index: 10;
-            overflow: hidden;
-        }
-
-        .side-panel img {
-            width: 100%;
-            height: auto;
-            display: block;
-            mix-blend-mode: multiply;
-            opacity: 0.9;
-        }
 
         /* Content Wrapper to shift content */
         body {
-            padding-left: 300px;
+            padding-left: 0;
         }
 
         @media (max-width: 1400px) {
-            .side-panel {
-                display: none;
-            }
 
             body {
                 padding-left: 0;
@@ -1660,18 +1956,102 @@
                 right: -5%;
             }
         }
+
+        /* Social Icons Alignment */
+        .contact-social {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            align-items: center;
+        }
+
+        .contact-social a {
+            color: #FFFFFF;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-social a:hover {
+            color: var(--gold);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+
+            /* General Layout */
+            section {
+                padding: 3rem 1rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            /* Hero Section */
+            .hero-content {
+                padding: 1rem;
+                width: 100%;
+            }
+
+            /* Video Section */
+            .video-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .video-card {
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 1.5rem;
+            }
+
+            /* Process Section */
+            .process-steps {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .process-arrow {
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+
+            /* Contact Section */
+            .contact-container {
+                flex-direction: column;
+            }
+
+            .contact-info,
+            .contact-form {
+                width: 100%;
+            }
+
+            /* Modal */
+            .modal-content {
+                width: 95%;
+                margin: 20% auto;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <!-- Side Panel -->
-    <div class="side-panel">
-        <img src="Sides_website.png" alt="Proceso del Cacao">
-    </div>
-
     <!-- Loader -->
     <div class="loader">
-        <img src="Logo.webp" alt="Savia Viva" class="loader-logo">
+        <img src="Images/Logo.webp" alt="Savia Viva" class="loader-logo">
     </div>
 
     <!-- Back to Top -->
@@ -1682,7 +2062,7 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-logo">
-            <img src="Logo.webp" alt="Savia Viva Logo">
+            <img src="Images/Logo.webp" alt="Savia Viva Logo">
             <span class="nav-brand">Savia Viva</span>
         </div>
 
@@ -1712,11 +2092,10 @@
     <section class="hero" id="home">
 
         <div class="hero-content reveal">
-            <img src="Logo.webp" alt="Finca Savia Viva" class="hero-logo">
+            <img src="Images/Logo.webp" alt="Finca Savia Viva" class="hero-logo">
             <p class="hero-subtitle">Finca</p>
             <h1 class="hero-title">Savia Viva</h1>
-            <p class="hero-tagline">"Del Origen a la Excelencia — Cacao Fino de Aroma, cultivado con pasión y
-                sostenibilidad en los paisajes privilegiados de Colombia."</p>
+            <p class="hero-tagline">"Cacao que cuida la vida"</p>
             <a href="#products" class="cta-button">Descubrir Colección</a>
         </div>
 
@@ -1738,7 +2117,7 @@
                 <!-- Criollo -->
                 <div class="variety-card" data-variety="criollo">
                     <div class="variety-image">
-                        <img src="Variedad_Criollo.jpg" alt="Cacao Criollo">
+                        <img src="Images/Variedad_Criollo.webp" alt="Cacao Criollo">
                         <span class="variety-badge">Premium</span>
                     </div>
                     <div class="variety-info">
@@ -1750,11 +2129,11 @@
                 <!-- Trinitario -->
                 <div class="variety-card" data-variety="trinitario">
                     <div class="variety-image">
-                        <img src="Variedad_SanVicente.jpg" alt="Cacao Trinitario">
+                        <img src="Images/Variedad_SanVicente.webp" alt="Cacao Trinitario">
                         <span class="variety-badge">Híbrido</span>
                     </div>
                     <div class="variety-info">
-                        <h3 class="variety-name">Trinitario</h3>
+                        <h3 class="variety-name">San Vicente</h3>
                         <p class="variety-origin">Sierra Nevada</p>
                     </div>
                 </div>
@@ -1762,10 +2141,10 @@
                 <!-- Forastero -->
                 <div class="variety-card" data-variety="forastero">
                     <div class="variety-image">
-                        <img src="Variedad_Amazonico.jpg" alt="Cacao Forastero">
+                        <img src="Images/Variedad_Amazonico.webp" alt="Cacao Forastero">
                     </div>
                     <div class="variety-info">
-                        <h3 class="variety-name">Forastero</h3>
+                        <h3 class="variety-name">Amazonico</h3>
                         <p class="variety-origin">Amazonia</p>
                     </div>
                 </div>
@@ -1773,11 +2152,11 @@
                 <!-- Nacional -->
                 <div class="variety-card" data-variety="nacional">
                     <div class="variety-image">
-                        <img src="Variedad_Sarabena.jpg" alt="Cacao Nacional">
+                        <img src="Images/Variedad_Sarabena.webp" alt="Cacao Nacional">
                         <span class="variety-badge">Aromático</span>
                     </div>
                     <div class="variety-info">
-                        <h3 class="variety-name">Nacional</h3>
+                        <h3 class="variety-name">Saravena</h3>
                         <p class="variety-origin">Fino de Aroma</p>
                     </div>
                 </div>
@@ -1791,7 +2170,7 @@
             <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
 
             <div class="modal-image">
-                <img id="modalImage" src="Variedad_Criollo.jpg" alt="Variedad de Cacao">
+                <img id="modalImage" src="Images/Variedad_Criollo.webp" alt="Variedad de Cacao">
             </div>
 
             <div class="modal-details">
@@ -1841,7 +2220,7 @@
 
     <!-- About Section -->
     <section class="about reveal" id="about">
-        <div class="container">
+ke         <div class="container">
             <div class="section-header">
                 <p class="section-label">Nuestra Historia</p>
                 <h2 class="section-title">Del Territorio al Corazón</h2>
@@ -1849,60 +2228,45 @@
             </div>
 
             <div class="about-grid">
-                <div class="about-image">
-                    <img src="Inti_Cacao.jpg" alt="Cosecha de cacao">
-                </div>
+                <div class="about-content"
+                    style="background: rgba(255, 250, 245, 0.8); padding: 2rem; border-radius: 40px; backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.6);">
+                    <p class="section-label">Nuestra Filosofía</p>
+                    <h2 class="section-title">El Sistema Cacao</h2>
+                    <p class="about-text" style="text-align: center; margin-bottom: 2rem;">
+                        Más que un producto, cultivamos un ecosistema vivo.
+                    </p>
 
-                <div class="about-content">
-                    <p class="section-label">Nuestro Legado</p>
-                    <h2 class="section-title">Cultivando Excelencia</h2>
-                    <p class="about-text">
-                        En el corazón de la Sierra Nevada, custodiamos un legado vivo. Finca Savia Viva es un santuario
-                        de biodiversidad donde la agricultura regenerativa y la tradición se unen.
-                    </p>
-                    <p class="about-text">
-                        Cada árbol es tratado con respeto y cada grano es seleccionado manualmente, garantizando una
-                        calidad excepcional que honra tanto a la tierra como al paladar más exigente. Nuestro compromiso
-                        es con la pureza, el sabor y la sostenibilidad.
-                    </p>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-number">100%</span>
-                            <span class="stat-label">Orgánico</span>
+                    <div class="phases-grid">
+                        <div class="phase-item">
+                            <i class="fas fa-leaf phase-icon"></i>
+                            <h4 class="phase-title">La Planta</h4>
+                            <p class="phase-desc">Prácticas agroecológicas y orgánicas</p>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-number">+50</span>
-                            <span class="stat-label">Años de Tradición</span>
+                        <div class="phase-item">
+                            <i class="fas fa-seedling phase-icon"></i>
+                            <h4 class="phase-title">El Cultivo</h4>
+                            <p class="phase-desc">Alimentamos insectos y animales nativos</p>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-number">Fino</span>
-                            <span class="stat-label">de Aroma</span>
+                        <div class="phase-item">
+                            <i class="fas fa-gears phase-icon"></i>
+                            <h4 class="phase-title">Transformación</h4>
+                            <p class="phase-desc">Cerrando la brecha tecnológica del campesino.</p>
+                        </div>
+                        <div class="phase-item">
+                            <i class="fas fa-mug-hot phase-icon"></i>
+                            <h4 class="phase-title">Consumo</h4>
+                            <p class="phase-desc">Ritual, memoria y territorio.</p>
                         </div>
                     </div>
                 </div>
+                <div class="about-image">
+                    <img src="Images/Persona_colecta.webp" alt="Cacao Harvest">
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Mission Section -->
-    <section class="mission" id="mission">
-        <div class="mission-content">
-            <p class="section-label">Nuestra Misión</p>
-            <h2 class="section-title">Dignificar al Productor</h2>
-            <div class="section-divider"></div>
 
-            <p class="mission-text">
-                "Quiero que el productor deje de vender grano y empiece a vender historia, sabor, identidad desde SU
-                producto transformado. Revitalizar el cacao es revitalizar memoria."
-            </p>
-
-            <div class="mission-quote">
-                <div class="section-divider" style="width: 40px;"></div>
-                <span>Una taza de chocolate colombiano es un ritual</span>
-                <div class="section-divider" style="width: 40px;"></div>
-            </div>
-        </div>
-    </section>
 
     <!-- Products Section -->
     <section class="products reveal" id="products">
@@ -1915,12 +2279,12 @@
             <div class="products-grid">
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="chocolate_bars.webp" alt="Chocolate Artesanal">
+                        <img src="Images/chocolate_bars.webp" alt="Chocolate Artesanal">
                         <span class="product-badge">Premium</span>
                     </div>
                     <div class="product-info">
                         <p class="product-category">Chocolate Negro</p>
-                        <h3 class="product-title">Barra Artesanal 70%</h3>
+                        <h3 class="product-title">Barra Artesanal 80%</h3>
                         <p class="product-price">$25.000 COP</p>
                     </div>
                     <div class="product-action">
@@ -1930,7 +2294,7 @@
 
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="cacao_beans.webp" alt="Granos de Cacao">
+                        <img src="Images/cacao_beans.webp" alt="Granos de Cacao">
                         <span class="product-badge">Cosecha Nueva</span>
                     </div>
                     <div class="product-info">
@@ -1945,7 +2309,7 @@
 
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="Mesa_500g.jpg" alt="Pasta de Cacao">
+                        <img src="Images/Mesa_500g.webp" alt="Pasta de Cacao">
                     </div>
                     <div class="product-info">
                         <p class="product-category">Ceremonial</p>
@@ -1972,38 +2336,38 @@
             <div class="process-timeline">
                 <div class="process-step">
                     <div class="process-icon">
-                        <img src="Persona_colecta.jpg" alt="Cosecha">
+                        <img src="Images/Persona_colecta.webp" alt="Cosecha">
                         <span class="process-number">1</span>
                     </div>
                     <h3 class="process-title">Cosecha</h3>
-                    <p class="process-desc">Selección manual de mazorcas maduras</p>
+                    <p class="process-desc">Selección manual asegurando solo frutos maduros</p>
                 </div>
 
                 <div class="process-step">
                     <div class="process-icon">
-                        <img src="Cacao_Nibs.jpg" alt="Fermentación">
+                        <img src="Images/Cacao_Nibs.jpg" alt="Fermentación">
                         <span class="process-number">2</span>
                     </div>
                     <h3 class="process-title">Fermentación</h3>
-                    <p class="process-desc">5-7 días de fermentación natural</p>
+                    <p class="process-desc">Realizada cuidadosamente y completa</p>
                 </div>
 
                 <div class="process-step">
                     <div class="process-icon">
-                        <img src="Cacao_Showcase.jpg" alt="Secado">
+                        <img src="Images/Cacao_Showcase.jpg" alt="Secado">
                         <span class="process-number">3</span>
                     </div>
-                    <h3 class="process-title">Secado</h3>
-                    <p class="process-desc">Secado al sol con volteo constante</p>
+                    <h3 class="process-title">Tostión</h3>
+                    <p class="process-desc">Baja temperatura para preservar los sabores más delicados</p>
                 </div>
 
                 <div class="process-step">
                     <div class="process-icon">
-                        <img src="Cacao_de_mesa.jpg" alt="Transformación">
+                        <img src="Images/Cacao_de_mesa.jpg" alt="Transformación">
                         <span class="process-number">4</span>
                     </div>
                     <h3 class="process-title">Transformación</h3>
-                    <p class="process-desc">Tostado y molido artesanal</p>
+                    <p class="process-desc">Grano grueso para no degradar los principios activos</p>
                 </div>
             </div>
         </div>
@@ -2014,7 +2378,7 @@
         <div class="container">
             <div class="impact-grid">
                 <div class="impact-image">
-                    <img src="Saru_Cacao.jpg" alt="Impacto social">
+                    <img src="Images/Saru_Cacao.webp" alt="Impacto social">
                 </div>
 
                 <div class="impact-content">
@@ -2051,8 +2415,8 @@
             <div class="video-grid">
                 <div class="video-card">
                     <div class="video-wrapper landscape">
-                        <video controls poster="Inti_Cacao.jpg">
-                            <source src="Into_the_Cacap.mp4" type="video/mp4">
+                        <video controls poster="Images/thumb_immersion.jpg">
+                            <source src="Images/Into_the_Cacap.mp4" type="video/mp4">
                             Tu navegador no soporta video.
                         </video>
                     </div>
@@ -2063,8 +2427,8 @@
 
                 <div class="video-card">
                     <div class="video-wrapper landscape">
-                        <video controls poster="Cacao_Showcase.jpg">
-                            <source src="Cacao_aLa_mesa.mp4" type="video/mp4">
+                        <video controls poster="Images/thumb_table.jpg">
+                            <source src="Images/Cacao_aLa_mesa.mp4" type="video/mp4">
                             Tu navegador no soporta video.
                         </video>
                     </div>
@@ -2075,8 +2439,8 @@
 
                 <div class="video-card">
                     <div class="video-wrapper landscape">
-                        <video controls poster="Cacao_Nibs.jpg">
-                            <source src="Moving_flowers.mp4" type="video/mp4">
+                        <video controls poster="Images/thumb_flowers.jpg">
+                            <source src="Images/Moving_flowers.mp4" type="video/mp4">
                             Tu navegador no soporta video.
                         </video>
                     </div>
@@ -2085,6 +2449,27 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission" id="mission">
+        <div class="mission-content">
+            <h2 class="section-title">Nuestro Futuro</h2>
+            <div class="section-divider"></div>
+            <div class="mission-paths">
+                <div class="path-card">
+                    <h3>Maquila Social</h3>
+                    <p>Independencia económica a través de tecnología rural accesible.</p>
+                </div>
+                <div class="path-card">
+                    <h3>Cultura Cacao</h3>
+                    <p>Reconexión cultural mediante rituales y sabores territoriales.</p>
+                </div>
+            </div>
+            <p class="mission-conclusion">
+                Intervenir el sistema para <strong>liberar al productor</strong>.
+            </p>
         </div>
     </section>
 
@@ -2098,7 +2483,8 @@
             </div>
 
             <div class="contact-wrapper">
-                <div class="contact-info">
+                <div class="contact-info"
+                    style="background: rgba(255, 250, 245, 0.8); padding: 2rem; border-radius: 40px; backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.6);">
                     <h3>Finca Savia Viva</h3>
                     <p>Estamos aquí para responder tus preguntas sobre nuestros productos, procesos y la historia del
                         cacao colombiano.</p>
@@ -2148,7 +2534,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-brand">
-                <img src="Logo.webp" alt="Savia Viva">
+                <img src="Images/Logo.webp" alt="Savia Viva">
                 <p>Cacao fino de sabor y aroma, cultivado con amor y responsabilidad en las tierras colombianas.</p>
             </div>
 
@@ -2206,7 +2592,7 @@
         setTimeout(hideLoader, 5000);
 
         // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
+        const navbar = document.querySelector('.navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
@@ -2216,8 +2602,8 @@
         });
 
         // Mobile menu toggle
-        const mobileToggle = document.getElementById('mobileToggle');
-        const navLinks = document.getElementById('navLinks');
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navLinks = document.querySelector('.nav-links');
 
         mobileToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
@@ -2246,7 +2632,7 @@
                 name: 'Criollo',
                 origin: 'Nativo Colombiano',
                 badge: 'Premium',
-                image: 'Variedad_Criollo.jpg',
+                image: 'Images/Variedad_Criollo.webp',
                 description: 'El cacao Criollo, venerado como el "Rey del Cacao", posee un perfil aromático excepcional y una delicadeza inigualable. Originario de América Central y Colombia, representa menos del 5% de la producción mundial. Sus granos, de tonalidades claras, dan vida a un chocolate con sofisticadas notas florales y frutales.',
                 intensity: 'Suave',
                 acidity: 'Baja',
@@ -2255,11 +2641,11 @@
                 flavors: ['Miel', 'Nuez', 'Caramelo', 'Flores']
             },
             trinitario: {
-                name: 'Trinitario',
-                origin: 'Sierra Nevada',
+                name: 'San Vicente',
+                origin: 'Mariquita',
                 badge: 'Híbrido',
-                image: 'Variedad_SanVicente.jpg',
-                description: 'El Trinitario es un híbrido excepcional que amalgama la complejidad aromática del Criollo con la robustez del Forastero. Cultivado en el terruño único de la Sierra Nevada de Santa Marta, desarrolla un carácter distintivo con matices sensoriales profundos, fruto de la riqueza mineral de nuestras montañas.',
+                image: 'Images/Variedad_SanVicente.webp',
+                description: 'El San Vicente es un híbrido excepcional que amalgama la complejidad aromática del Criollo con la robustez del Forastero. Cultivado en el terruño único de la Sierra Nevada de Santa Marta, desarrolla un carácter distintivo con matices sensoriales profundos, fruto de la riqueza mineral de nuestras montañas.',
                 intensity: 'Media',
                 acidity: 'Media',
                 bitterness: 'Medio',
@@ -2267,10 +2653,10 @@
                 flavors: ['Frutas Rojas', 'Especias', 'Cítricos', 'Madera']
             },
             forastero: {
-                name: 'Forastero',
+                name: 'Amazonico',
                 origin: 'Amazonía',
                 badge: 'Robusto',
-                image: 'Variedad_Amazonico.jpg',
+                image: 'Images/Variedad_Amazonico.webp',
                 description: 'El Forastero, pilar de la industria chocolatera mundial, es reconocido por su vigor y potencia. Proveniente de la cuenca amazónica, ofrece un perfil de sabor intenso y directo. Nuestro Forastero es seleccionado rigurosamente para garantizar notas terrosas profundas y un cuerpo robusto, ideal para chocolates de carácter.',
                 intensity: 'Fuerte',
                 acidity: 'Baja',
@@ -2279,11 +2665,11 @@
                 flavors: ['Tierra', 'Tabaco', 'Café', 'Nuez Tostada']
             },
             nacional: {
-                name: 'Nacional',
+                name: 'Sarabena',
                 origin: 'Fino de Aroma',
                 badge: 'Aromático',
-                image: 'Variedad_Sarabena.jpg',
-                description: 'El cacao Nacional, o "Arriba", es una joya de la biodiversidad. Clasificado como "Fino de Aroma", es célebre por su perfil sensorial superior. Se distingue por sus exquisitas notas florales, a menudo evocando jazmín y azahar, y una complejidad de sabor que lo convierte en el favorito de los chocolateros artesanales más exigentes.',
+                image: 'Images/Variedad_Sarabena.webp',
+                description: 'El cacao Sarabena, es una joya de la biodiversidad. Clasificado como "Fino de Aroma", es célebre por su perfil sensorial superior. Se distingue por sus exquisitas notas florales, a menudo evocando jazmín y azahar, y una complejidad de sabor que lo convierte en el favorito de los chocolateros artesanales más exigentes.',
                 intensity: 'Media-Suave',
                 acidity: 'Media',
                 bitterness: 'Bajo',
@@ -2349,7 +2735,7 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
+                    entry.target.classList.add('visible');
                 }
             });
         }, observerOptions);

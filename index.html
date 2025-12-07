@@ -49,7 +49,7 @@
         body {
             font-family: 'Montserrat', sans-serif;
             background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
-                url('Images/imag9.webp'),
+                url('Img_Website/imag9.webp'),
                 radial-gradient(circle at 50% 0%, #EFEBE9 0%, #D7CCC8 60%, #A1887F 100%);
             background-repeat: no-repeat, no-repeat, no-repeat;
             background-position: center top, center top, center top;
@@ -60,9 +60,12 @@
             /* Increased line height */
             font-size: 1.05rem;
             /* Increased base font size */
-            scroll-behavior: smooth;
             position: relative;
             /* For absolute positioning of side panels */
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         .font-serif {
@@ -96,9 +99,10 @@
         }
 
         .navbar.scrolled {
-            background: rgba(245, 235, 224, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 30px rgba(62, 39, 35, 0.08);
+            background: rgba(245, 235, 224, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 30px rgba(62, 39, 35, 0.05);
             padding: 0.75rem 2rem;
             border-bottom: 1px solid rgba(166, 123, 91, 0.1);
         }
@@ -212,7 +216,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(62, 39, 35, 0.2);
+            box-shadow: 0 10px 25px rgba(62, 39, 35, 0.15);
             z-index: 1;
         }
 
@@ -308,7 +312,7 @@
             backdrop-filter: blur(15px);
             border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 20px 40px rgba(62, 39, 35, 0.1);
+            box-shadow: 0 20px 50px rgba(62, 39, 35, 0.08);
         }
 
         .hero-logo {
@@ -319,7 +323,7 @@
             /* Ensure full logo visibility */
             margin-bottom: 2rem;
             box-shadow:
-                0 25px 60px rgba(45, 24, 16, 0.25),
+                0 25px 60px rgba(45, 24, 16, 0.15),
                 0 0 0 8px var(--gold),
                 0 0 0 12px var(--brown-dark);
             animation: float 6s ease-in-out infinite;
@@ -498,7 +502,7 @@
             /* Softer corners */
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 20px 50px rgba(62, 39, 35, 0.08);
+            box-shadow: 0 20px 50px rgba(62, 39, 35, 0.05);
         }
 
         .about-content {
@@ -508,7 +512,7 @@
             /* Softer corners */
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 20px 50px rgba(62, 39, 35, 0.08);
+            box-shadow: 0 20px 50px rgba(62, 39, 35, 0.05);
         }
 
         .about-content h3 {
@@ -573,7 +577,7 @@
             border-radius: 40px;
             /* Softer corners */
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(62, 39, 35, 0.08);
+            box-shadow: 0 15px 35px rgba(62, 39, 35, 0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             position: relative;
@@ -885,7 +889,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('Images/montana_Cacao.webp') center/cover;
+            background: url('Img_Website/montana_Cacao.webp') center/cover;
             opacity: 0.1;
         }
 
@@ -1074,7 +1078,7 @@
             border-radius: 40px;
             /* Softer corners */
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(62, 39, 35, 0.08);
+            box-shadow: 0 15px 35px rgba(62, 39, 35, 0.05);
             transition: transform 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.6);
         }
@@ -2051,7 +2055,7 @@
 <body>
     <!-- Loader -->
     <div class="loader">
-        <img src="Images/Logo.webp" alt="Savia Viva" class="loader-logo">
+        <img src="Img_Website/Logo.webp" alt="Savia Viva" class="loader-logo">
     </div>
 
     <!-- Back to Top -->
@@ -2062,7 +2066,7 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-logo">
-            <img src="Images/Logo.webp" alt="Savia Viva Logo">
+            <img src="Img_Website/Logo.webp" alt="Savia Viva Logo">
             <span class="nav-brand">Savia Viva</span>
         </div>
 
@@ -2092,7 +2096,7 @@
     <section class="hero" id="home">
 
         <div class="hero-content reveal">
-            <img src="Images/Logo.webp" alt="Finca Savia Viva" class="hero-logo">
+            <img src="Img_Website/Logo.webp" alt="Finca Savia Viva" class="hero-logo">
             <p class="hero-subtitle">Finca</p>
             <h1 class="hero-title">Savia Viva</h1>
             <p class="hero-tagline">"Cacao que cuida la vida"</p>
@@ -2117,7 +2121,7 @@
                 <!-- Criollo -->
                 <div class="variety-card" data-variety="criollo">
                     <div class="variety-image">
-                        <img src="Images/Variedad_Criollo.webp" alt="Cacao Criollo">
+                        <img src="Img_Website/Variedad_Criollo.webp" alt="Cacao Criollo" loading="lazy">
                         <span class="variety-badge">Premium</span>
                     </div>
                     <div class="variety-info">
@@ -2129,7 +2133,7 @@
                 <!-- Trinitario -->
                 <div class="variety-card" data-variety="trinitario">
                     <div class="variety-image">
-                        <img src="Images/Variedad_SanVicente.webp" alt="Cacao Trinitario">
+                        <img src="Img_Website/Variedad_SanVicente.webp" alt="Cacao Trinitario" loading="lazy">
                         <span class="variety-badge">Híbrido</span>
                     </div>
                     <div class="variety-info">
@@ -2141,7 +2145,7 @@
                 <!-- Forastero -->
                 <div class="variety-card" data-variety="forastero">
                     <div class="variety-image">
-                        <img src="Images/Variedad_Amazonico.webp" alt="Cacao Forastero">
+                        <img src="Img_Website/Variedad_Amazonico.webp" alt="Cacao Forastero" loading="lazy">
                     </div>
                     <div class="variety-info">
                         <h3 class="variety-name">Amazonico</h3>
@@ -2152,7 +2156,7 @@
                 <!-- Nacional -->
                 <div class="variety-card" data-variety="nacional">
                     <div class="variety-image">
-                        <img src="Images/Variedad_Sarabena.webp" alt="Cacao Nacional">
+                        <img src="Img_Website/Variedad_Sarabena.webp" alt="Cacao Nacional" loading="lazy">
                         <span class="variety-badge">Aromático</span>
                     </div>
                     <div class="variety-info">
@@ -2170,7 +2174,7 @@
             <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
 
             <div class="modal-image">
-                <img id="modalImage" src="Images/Variedad_Criollo.webp" alt="Variedad de Cacao">
+                <img id="modalImage" src="Img_Website/Variedad_Criollo.webp" alt="Variedad de Cacao">
             </div>
 
             <div class="modal-details">
@@ -2220,7 +2224,7 @@
 
     <!-- About Section -->
     <section class="about reveal" id="about">
-ke         <div class="container">
+        <div class="container">
             <div class="section-header">
                 <p class="section-label">Nuestra Historia</p>
                 <h2 class="section-title">Del Territorio al Corazón</h2>
@@ -2260,7 +2264,7 @@ ke         <div class="container">
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="Images/Persona_colecta.webp" alt="Cacao Harvest">
+                    <img src="Img_Website/Persona_colecta.webp" alt="Cacao Harvest" loading="lazy">
                 </div>
             </div>
         </div>
@@ -2279,7 +2283,7 @@ ke         <div class="container">
             <div class="products-grid">
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="Images/chocolate_bars.webp" alt="Chocolate Artesanal">
+                        <img src="Img_Website/chocolate_bars.webp" alt="Chocolate Artesanal" loading="lazy">
                         <span class="product-badge">Premium</span>
                     </div>
                     <div class="product-info">
@@ -2294,7 +2298,7 @@ ke         <div class="container">
 
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="Images/cacao_beans.webp" alt="Granos de Cacao">
+                        <img src="Img_Website/cacao_beans.webp" alt="Granos de Cacao" loading="lazy">
                         <span class="product-badge">Cosecha Nueva</span>
                     </div>
                     <div class="product-info">
@@ -2309,7 +2313,7 @@ ke         <div class="container">
 
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="Images/Mesa_500g.webp" alt="Pasta de Cacao">
+                        <img src="Img_Website/Mesa_500g.webp" alt="Pasta de Cacao" loading="lazy">
                     </div>
                     <div class="product-info">
                         <p class="product-category">Ceremonial</p>
@@ -2336,7 +2340,7 @@ ke         <div class="container">
             <div class="process-timeline">
                 <div class="process-step">
                     <div class="process-icon">
-                        <img src="Images/Persona_colecta.webp" alt="Cosecha">
+                        <img src="Img_Website/Persona_colecta.webp" alt="Cosecha" loading="lazy">
                         <span class="process-number">1</span>
                     </div>
                     <h3 class="process-title">Cosecha</h3>
@@ -2345,7 +2349,7 @@ ke         <div class="container">
 
                 <div class="process-step">
                     <div class="process-icon">
-                        <img src="Images/Cacao_Nibs.jpg" alt="Fermentación">
+                        <img src="Img_Website/Cacao_Nibs.jpg" alt="Fermentación" loading="lazy">
                         <span class="process-number">2</span>
                     </div>
                     <h3 class="process-title">Fermentación</h3>
@@ -2354,7 +2358,7 @@ ke         <div class="container">
 
                 <div class="process-step">
                     <div class="process-icon">
-                        <img src="Images/Cacao_Showcase.jpg" alt="Secado">
+                        <img src="Img_Website/Cacao_Showcase.jpg" alt="Secado" loading="lazy">
                         <span class="process-number">3</span>
                     </div>
                     <h3 class="process-title">Tostión</h3>
@@ -2363,7 +2367,7 @@ ke         <div class="container">
 
                 <div class="process-step">
                     <div class="process-icon">
-                        <img src="Images/Cacao_de_mesa.jpg" alt="Transformación">
+                        <img src="Img_Website/Cacao_de_mesa.jpg" alt="Transformación" loading="lazy">
                         <span class="process-number">4</span>
                     </div>
                     <h3 class="process-title">Transformación</h3>
@@ -2378,7 +2382,7 @@ ke         <div class="container">
         <div class="container">
             <div class="impact-grid">
                 <div class="impact-image">
-                    <img src="Images/Saru_Cacao.webp" alt="Impacto social">
+                    <img src="Img_Website/Saru_Cacao.webp" alt="Impacto social" loading="lazy">
                 </div>
 
                 <div class="impact-content">
@@ -2415,8 +2419,8 @@ ke         <div class="container">
             <div class="video-grid">
                 <div class="video-card">
                     <div class="video-wrapper landscape">
-                        <video controls poster="Images/thumb_immersion.jpg">
-                            <source src="Images/Into_the_Cacap.mp4" type="video/mp4">
+                        <video controls poster="Img_Website/thumb_immersion.jpg">
+                            <source src="Img_Website/Into_the_Cacap.mp4" type="video/mp4">
                             Tu navegador no soporta video.
                         </video>
                     </div>
@@ -2427,8 +2431,8 @@ ke         <div class="container">
 
                 <div class="video-card">
                     <div class="video-wrapper landscape">
-                        <video controls poster="Images/thumb_table.jpg">
-                            <source src="Images/Cacao_aLa_mesa.mp4" type="video/mp4">
+                        <video controls poster="Img_Website/thumb_table.jpg">
+                            <source src="Img_Website/Cacao_aLa_mesa.mp4" type="video/mp4">
                             Tu navegador no soporta video.
                         </video>
                     </div>
@@ -2439,8 +2443,8 @@ ke         <div class="container">
 
                 <div class="video-card">
                     <div class="video-wrapper landscape">
-                        <video controls poster="Images/thumb_flowers.jpg">
-                            <source src="Images/Moving_flowers.mp4" type="video/mp4">
+                        <video controls poster="Img_Website/thumb_flowers.jpg">
+                            <source src="Img_Website/Moving_flowers.mp4" type="video/mp4">
                             Tu navegador no soporta video.
                         </video>
                     </div>
@@ -2534,7 +2538,7 @@ ke         <div class="container">
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-brand">
-                <img src="Images/Logo.webp" alt="Savia Viva">
+                <img src="Img_Website/Logo.webp" alt="Savia Viva">
                 <p>Cacao fino de sabor y aroma, cultivado con amor y responsabilidad en las tierras colombianas.</p>
             </div>
 
@@ -2632,7 +2636,7 @@ ke         <div class="container">
                 name: 'Criollo',
                 origin: 'Nativo Colombiano',
                 badge: 'Premium',
-                image: 'Images/Variedad_Criollo.webp',
+                image: 'Img_Website/Variedad_Criollo.webp',
                 description: 'El cacao Criollo, venerado como el "Rey del Cacao", posee un perfil aromático excepcional y una delicadeza inigualable. Originario de América Central y Colombia, representa menos del 5% de la producción mundial. Sus granos, de tonalidades claras, dan vida a un chocolate con sofisticadas notas florales y frutales.',
                 intensity: 'Suave',
                 acidity: 'Baja',
@@ -2641,11 +2645,11 @@ ke         <div class="container">
                 flavors: ['Miel', 'Nuez', 'Caramelo', 'Flores']
             },
             trinitario: {
-                name: 'San Vicente',
-                origin: 'Mariquita',
+                name: 'Trinitario',
+                origin: 'Sierra Nevada',
                 badge: 'Híbrido',
-                image: 'Images/Variedad_SanVicente.webp',
-                description: 'El San Vicente es un híbrido excepcional que amalgama la complejidad aromática del Criollo con la robustez del Forastero. Cultivado en el terruño único de la Sierra Nevada de Santa Marta, desarrolla un carácter distintivo con matices sensoriales profundos, fruto de la riqueza mineral de nuestras montañas.',
+                image: 'Img_Website/Variedad_SanVicente.webp',
+                description: 'El Trinitario es un híbrido excepcional que amalgama la complejidad aromática del Criollo con la robustez del Forastero. Cultivado en el terruño único de la Sierra Nevada de Santa Marta, desarrolla un carácter distintivo con matices sensoriales profundos, fruto de la riqueza mineral de nuestras montañas.',
                 intensity: 'Media',
                 acidity: 'Media',
                 bitterness: 'Medio',
@@ -2653,10 +2657,10 @@ ke         <div class="container">
                 flavors: ['Frutas Rojas', 'Especias', 'Cítricos', 'Madera']
             },
             forastero: {
-                name: 'Amazonico',
+                name: 'Forastero',
                 origin: 'Amazonía',
                 badge: 'Robusto',
-                image: 'Images/Variedad_Amazonico.webp',
+                image: 'Img_Website/Variedad_Amazonico.webp',
                 description: 'El Forastero, pilar de la industria chocolatera mundial, es reconocido por su vigor y potencia. Proveniente de la cuenca amazónica, ofrece un perfil de sabor intenso y directo. Nuestro Forastero es seleccionado rigurosamente para garantizar notas terrosas profundas y un cuerpo robusto, ideal para chocolates de carácter.',
                 intensity: 'Fuerte',
                 acidity: 'Baja',
@@ -2665,11 +2669,11 @@ ke         <div class="container">
                 flavors: ['Tierra', 'Tabaco', 'Café', 'Nuez Tostada']
             },
             nacional: {
-                name: 'Sarabena',
+                name: 'Nacional',
                 origin: 'Fino de Aroma',
                 badge: 'Aromático',
-                image: 'Images/Variedad_Sarabena.webp',
-                description: 'El cacao Sarabena, es una joya de la biodiversidad. Clasificado como "Fino de Aroma", es célebre por su perfil sensorial superior. Se distingue por sus exquisitas notas florales, a menudo evocando jazmín y azahar, y una complejidad de sabor que lo convierte en el favorito de los chocolateros artesanales más exigentes.',
+                image: 'Img_Website/Variedad_Sarabena.webp',
+                description: 'El cacao Nacional, o "Arriba", es una joya de la biodiversidad. Clasificado como "Fino de Aroma", es célebre por su perfil sensorial superior. Se distingue por sus exquisitas notas florales, a menudo evocando jazmín y azahar, y una complejidad de sabor que lo convierte en el favorito de los chocolateros artesanales más exigentes.',
                 intensity: 'Media-Suave',
                 acidity: 'Media',
                 bitterness: 'Bajo',
@@ -2742,6 +2746,33 @@ ke         <div class="container">
 
         document.querySelectorAll('.reveal').forEach(el => {
             observer.observe(el);
+        });
+
+        // Staggered Animation for Grids
+        const staggerObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const children = entry.target.children;
+                    Array.from(children).forEach((child, index) => {
+                        setTimeout(() => {
+                            child.style.opacity = '1';
+                            child.style.transform = 'translateY(0)';
+                        }, index * 150); // 150ms delay between each item
+                    });
+                    staggerObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Apply stagger to grids
+        document.querySelectorAll('.varieties-grid, .products-grid, .process-timeline').forEach(grid => {
+            // Prepare children for animation
+            Array.from(grid.children).forEach(child => {
+                child.style.opacity = '0';
+                child.style.transform = 'translateY(20px)';
+                child.style.transition = 'all 0.6s ease-out';
+            });
+            staggerObserver.observe(grid);
         });
     </script>
 </body>

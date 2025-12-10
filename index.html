@@ -1593,13 +1593,23 @@
             display: block;
             opacity: 1;
             pointer-events: auto;
+            touch-action: none;
         }
 
         /* Hide mobile-only elements on desktop */
         .mobile-menu-header,
         .mobile-menu-divider,
-        .mobile-menu-social {
+        .mobile-menu-social,
+        .mobile-close-btn {
             display: none;
+        }
+
+        /* Lock body and html scroll when menu is open */
+        body.menu-open,
+        html.menu-open {
+            overflow: hidden !important;
+            height: 100vh;
+            height: 100dvh;
         }
 
         /* Responsive Design */
@@ -1642,8 +1652,15 @@
                 -webkit-backdrop-filter: blur(25px);
                 flex-direction: column;
                 align-items: center;
-                justify-content: center;
-                gap: 0.3rem;
+                justify-content: flex-start;
+                padding-top: 80px;
+                padding-bottom: 30px;
+                gap: 0.15rem;
+                overflow-y: auto;
+                overflow-x: hidden;
+                overscroll-behavior: contain;
+                -webkit-overflow-scrolling: touch;
+                touch-action: pan-y;
                 transform: translateX(100%);
                 transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
                 z-index: 1050;
@@ -1693,7 +1710,8 @@
                 transform: translateX(30px);
                 transition: all 0.3s ease;
                 position: relative;
-                z-index: 10;
+                z-index: 20;
+                pointer-events: auto;
             }
 
             .nav-links.active li {
@@ -1751,11 +1769,11 @@
             }
 
             .nav-links a {
-                font-size: 1.6rem;
+                font-size: 1.1rem;
                 font-weight: 600;
                 font-family: 'Cormorant Garamond', serif;
                 color: var(--cream);
-                padding: 1rem 2.5rem;
+                padding: 0.8rem 2.5rem;
                 position: relative;
                 letter-spacing: 0.08em;
                 text-transform: uppercase;
@@ -1763,8 +1781,10 @@
                 border-radius: 8px;
                 transition: all 0.3s ease;
                 cursor: pointer;
-                z-index: 100;
-                pointer-events: auto;
+                z-index: 200;
+                pointer-events: auto !important;
+                -webkit-tap-highlight-color: rgba(166, 124, 82, 0.3);
+                touch-action: manipulation;
             }
 
             .nav-links a::after {
@@ -1792,27 +1812,60 @@
                 transform: scale(1.02);
             }
 
+            /* Mobile Menu Close Button - only visible when menu is active */
+            .mobile-close-btn {
+                display: none;
+                align-items: center;
+                justify-content: center;
+                position: fixed;
+                top: 15px;
+                right: 15px;
+                width: 48px;
+                height: 48px;
+                background: rgba(45, 28, 20, 0.95);
+                border: 2px solid var(--gold);
+                border-radius: 50%;
+                color: var(--cream);
+                font-size: 1.4rem;
+                cursor: pointer;
+                z-index: 1200;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            }
+
+            /* Show close button when menu is active */
+            .nav-links.active~.mobile-close-btn {
+                display: flex;
+            }
+
+            .mobile-close-btn:hover,
+            .mobile-close-btn:active {
+                background: var(--gold);
+                color: var(--brown-dark);
+                transform: rotate(90deg);
+            }
+
             /* Mobile Menu Header */
             .mobile-menu-header {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 0.6rem;
-                margin-bottom: 1rem;
-                padding: 1.5rem 2rem;
+                gap: 0.4rem;
+                margin-bottom: 0.5rem;
+                padding: 1rem 1.5rem;
                 position: relative;
             }
 
             .mobile-menu-logo {
-                width: 90px;
-                height: 90px;
+                width: 60px;
+                height: 60px;
                 border-radius: 50%;
                 object-fit: contain;
-                border: 3px solid var(--gold);
+                border: 2px solid var(--gold);
                 box-shadow:
-                    0 0 0 6px rgba(45, 28, 20, 0.8),
-                    0 0 30px rgba(166, 124, 82, 0.4),
-                    0 8px 25px rgba(0, 0, 0, 0.3);
+                    0 0 0 4px rgba(45, 28, 20, 0.8),
+                    0 0 20px rgba(166, 124, 82, 0.3),
+                    0 6px 15px rgba(0, 0, 0, 0.3);
                 animation: logoGlow 3s ease-in-out infinite alternate;
             }
 
@@ -1828,10 +1881,10 @@
 
             .mobile-menu-brand {
                 font-family: 'Cormorant Garamond', serif;
-                font-size: 2rem;
+                font-size: 1.4rem;
                 font-weight: 600;
                 color: var(--cream);
-                letter-spacing: 0.15em;
+                letter-spacing: 0.12em;
                 font-style: italic;
                 text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             }
@@ -1856,7 +1909,7 @@
                         var(--gold) 50%,
                         rgba(166, 124, 82, 0.6) 70%,
                         transparent);
-                margin: 0.6rem auto;
+                margin: 0.3rem auto;
                 position: relative;
             }
 
@@ -1937,7 +1990,15 @@
             }
 
             .section-title {
-                font-size: 2.2rem;
+                font-size: 1.8rem;
+            }
+
+            /* Fix centering for section headers on mobile */
+            .section-header {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             }
 
             .hero {
@@ -2410,6 +2471,11 @@
             <span></span>
             <span></span>
         </div>
+
+        <!-- Mobile Close Button (separate from menu) -->
+        <button class="mobile-close-btn" id="mobileCloseBtn" onclick="closeMobileMenu()" aria-label="Cerrar menú">
+            <i class="fas fa-times"></i>
+        </button>
     </nav>
 
     <!-- Mobile Menu Overlay -->
@@ -2941,24 +3007,59 @@
         const mobileToggle = document.querySelector('.mobile-toggle');
         const navLinks = document.querySelector('.nav-links');
         const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+        let scrollPosition = 0;
+
+        function lockScroll() {
+            scrollPosition = window.pageYOffset;
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollPosition}px`;
+            document.body.style.width = '100%';
+        }
+
+        function unlockScroll() {
+            document.body.style.removeProperty('overflow');
+            document.body.style.removeProperty('position');
+            document.body.style.removeProperty('top');
+            document.body.style.removeProperty('width');
+            window.scrollTo(0, scrollPosition);
+        }
 
         function toggleMobileMenu() {
             mobileToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
             mobileMenuOverlay.classList.toggle('active');
-            // Prevent body scroll when menu is open
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+
+            if (navLinks.classList.contains('active')) {
+                lockScroll();
+            } else {
+                unlockScroll();
+            }
         }
 
         function closeMobileMenu() {
             mobileToggle.classList.remove('active');
             navLinks.classList.remove('active');
             mobileMenuOverlay.classList.remove('active');
-            document.body.style.overflow = '';
+            unlockScroll();
         }
 
         mobileToggle.addEventListener('click', toggleMobileMenu);
         mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+        // Prevent ALL touch scrolling except inside menu
+        function preventScroll(e) {
+            if (navLinks.classList.contains('active')) {
+                if (!navLinks.contains(e.target)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+            }
+        }
+
+        document.addEventListener('touchstart', preventScroll, { passive: false });
+        document.addEventListener('touchmove', preventScroll, { passive: false });
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

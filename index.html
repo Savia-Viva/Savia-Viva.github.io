@@ -1596,6 +1596,155 @@
             touch-action: none;
         }
 
+        /* Search Modal */
+        .search-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(45, 28, 20, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 10vh;
+        }
+
+        .search-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .search-modal-content {
+            width: 90%;
+            max-width: 600px;
+            background: rgba(62, 39, 35, 0.9);
+            border: 1px solid rgba(166, 124, 82, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .search-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            color: var(--cream);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .search-close:hover {
+            background: rgba(166, 124, 82, 0.2);
+            color: var(--gold);
+        }
+
+        .search-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-icon-large {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .search-header h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--cream);
+            margin: 0;
+        }
+
+        .search-input-wrapper {
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input-wrapper input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            font-family: 'Lato', sans-serif;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(166, 124, 82, 0.3);
+            border-radius: 30px;
+            color: var(--cream);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input-wrapper input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .search-input-wrapper input:focus {
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .search-results {
+            max-height: 50vh;
+            overflow-y: auto;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .search-result-item:hover {
+            background: rgba(166, 124, 82, 0.2);
+            border-color: rgba(166, 124, 82, 0.3);
+        }
+
+        .search-result-item i {
+            font-size: 1.5rem;
+            color: var(--gold);
+            width: 40px;
+            text-align: center;
+        }
+
+        .search-result-info h4 {
+            margin: 0 0 0.25rem 0;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--cream);
+        }
+
+        .search-result-info p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .no-results {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            padding: 2rem;
+        }
+
         /* Hide mobile-only elements on desktop */
         .mobile-menu-header,
         .mobile-menu-divider,
@@ -2181,6 +2330,48 @@
             transform: translateY(-5px);
         }
 
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #FFF8F0 0%, #F5E6D3 100%);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brown-dark);
+            font-size: 1.6rem;
+            text-decoration: none;
+            z-index: 999;
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            background: var(--gold);
+            color: var(--cream);
+            transform: scale(1.1);
+            box-shadow:
+                0 6px 25px rgba(166, 124, 82, 0.4),
+                0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.4rem;
+            }
+        }
+
         /* Enhanced Product Card */
         .product-card {
             position: relative;
@@ -2425,6 +2616,12 @@
         <img src="Img_Website/Logo.webp" alt="Savia Viva" class="loader-logo">
     </div>
 
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/573214516563?text=Hola,%20me%20gustaría%20saber%20más%20sobre%20Savia%20Viva" target="_blank"
+        class="whatsapp-float" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <!-- Back to Top -->
     <button class="back-to-top" id="backToTop" aria-label="Volver arriba">
         <i class="fas fa-arrow-up"></i>
@@ -2455,15 +2652,17 @@
             <li class="mobile-menu-divider"></li>
             <!-- Social Links -->
             <li class="mobile-menu-social">
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/savia.viva/" target="_blank" aria-label="Instagram"><i
+                        class="fab fa-instagram"></i></a>
                 <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://wa.me/573214516563?text=Hola,%20me%20gustaría%20saber%20más%20sobre%20Savia%20Viva"
+                    target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </li>
         </ul>
 
         <div class="nav-icons">
-            <a href="#"><i class="fas fa-search"></i></a>
-            <a href="#"><i class="fas fa-shopping-bag"></i></a>
+            <a href="#" id="searchBtn" onclick="openSearch(event)" aria-label="Buscar"><i class="fas fa-search"></i></a>
+            <a href="#contact" aria-label="Contacto"><i class="fas fa-envelope"></i></a>
         </div>
 
         <div class="mobile-toggle" id="mobileToggle">
@@ -2480,6 +2679,23 @@
 
     <!-- Mobile Menu Overlay -->
     <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <button class="search-close" id="searchClose" aria-label="Cerrar búsqueda">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="search-header">
+                <i class="fas fa-search search-icon-large"></i>
+                <h3>Buscar en el sitio</h3>
+            </div>
+            <div class="search-input-wrapper">
+                <input type="text" id="searchInput" placeholder="Escribe para buscar..." autocomplete="off">
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -2898,18 +3114,27 @@
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span>info@saviaviva.com</span>
+                            <a href="mailto:savia.vivaa@gmail.com"
+                                style="color: inherit; text-decoration: none;">savia.vivaa@gmail.com</a>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
-                            <span>+57 XXX XXX XXXX</span>
+                            <a href="tel:+573214516563" style="color: inherit; text-decoration: none;">+57 321 451
+                                6563</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <a href="https://wa.me/573214516563?text=Hola,%20me%20gustaría%20saber%20más%20sobre%20Savia%20Viva"
+                                target="_blank" style="color: inherit; text-decoration: none;">WhatsApp</a>
                         </div>
                     </div>
 
                     <div class="contact-social">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.instagram.com/savia.viva/" target="_blank" aria-label="Instagram"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://wa.me/573214516563?text=Hola,%20me%20gustaría%20saber%20más%20sobre%20Savia%20Viva"
+                            target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
 
@@ -3022,6 +3247,98 @@
 
         mobileToggle.addEventListener('click', toggleMobileMenu);
         mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+        // Search functionality
+        const searchModal = document.getElementById('searchModal');
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        const searchClose = document.getElementById('searchClose');
+
+        // Define searchable sections
+        const searchableItems = [
+            { id: 'home', title: 'Inicio', description: 'Página principal de Savia Viva', icon: 'fa-home', keywords: ['inicio', 'home', 'principal', 'bienvenido'] },
+            { id: 'about', title: 'Nosotros', description: 'Nuestra historia y el cacao del territorio', icon: 'fa-heart', keywords: ['nosotros', 'historia', 'territorio', 'planta', 'cultivo', 'sobre'] },
+            { id: 'varieties', title: 'Variedades', description: 'Criollo, Trinitario y Forastero', icon: 'fa-seedling', keywords: ['variedades', 'criollo', 'trinitario', 'forastero', 'tipos', 'cacao'] },
+            { id: 'products', title: 'Productos', description: 'Nuestra línea de productos de cacao', icon: 'fa-box', keywords: ['productos', 'chocolate', 'tabletas', 'nibs', 'polvo', 'licor'] },
+            { id: 'experience', title: 'Experiencia', description: 'Inmersión sensorial con nuestro cacao', icon: 'fa-eye', keywords: ['experiencia', 'sensorial', 'video', 'inmersión'] },
+            { id: 'process', title: 'El Proceso', description: 'Cosecha, fermentación, tostión y transformación', icon: 'fa-cogs', keywords: ['proceso', 'cosecha', 'fermentación', 'tostión', 'transformación'] },
+            { id: 'mission', title: 'Misión', description: 'Nuestra misión y compromiso', icon: 'fa-bullseye', keywords: ['misión', 'visión', 'compromiso', 'sostenible'] },
+            { id: 'contact', title: 'Contacto', description: 'Información de contacto y formulario', icon: 'fa-envelope', keywords: ['contacto', 'email', 'teléfono', 'dirección', 'formulario'] }
+        ];
+
+        function openSearch(e) {
+            if (e) e.preventDefault();
+            searchModal.classList.add('active');
+            searchInput.focus();
+            showAllSections();
+        }
+
+        function closeSearch() {
+            searchModal.classList.remove('active');
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+        }
+
+        function showAllSections() {
+            searchResults.innerHTML = searchableItems.map(item => `
+                <div class="search-result-item" onclick="navigateToSection('${item.id}')">
+                    <i class="fas ${item.icon}"></i>
+                    <div class="search-result-info">
+                        <h4>${item.title}</h4>
+                        <p>${item.description}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function searchSections(query) {
+            if (!query.trim()) {
+                showAllSections();
+                return;
+            }
+
+            const lowerQuery = query.toLowerCase();
+            const results = searchableItems.filter(item => {
+                return item.title.toLowerCase().includes(lowerQuery) ||
+                    item.description.toLowerCase().includes(lowerQuery) ||
+                    item.keywords.some(kw => kw.includes(lowerQuery));
+            });
+
+            if (results.length === 0) {
+                searchResults.innerHTML = '<p class="no-results">No se encontraron resultados para "' + query + '"</p>';
+            } else {
+                searchResults.innerHTML = results.map(item => `
+                    <div class="search-result-item" onclick="navigateToSection('${item.id}')">
+                        <i class="fas ${item.icon}"></i>
+                        <div class="search-result-info">
+                            <h4>${item.title}</h4>
+                            <p>${item.description}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function navigateToSection(sectionId) {
+            closeSearch();
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        searchInput.addEventListener('input', (e) => searchSections(e.target.value));
+        searchClose.addEventListener('click', closeSearch);
+        searchModal.addEventListener('click', (e) => {
+            if (e.target === searchModal) closeSearch();
+        });
+
+        // Close search with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && searchModal.classList.contains('active')) {
+                closeSearch();
+            }
+        });
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

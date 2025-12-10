@@ -3007,59 +3007,21 @@
         const mobileToggle = document.querySelector('.mobile-toggle');
         const navLinks = document.querySelector('.nav-links');
         const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
-        let scrollPosition = 0;
-
-        function lockScroll() {
-            scrollPosition = window.pageYOffset;
-            document.body.style.overflow = 'hidden';
-            document.body.style.position = 'fixed';
-            document.body.style.top = `-${scrollPosition}px`;
-            document.body.style.width = '100%';
-        }
-
-        function unlockScroll() {
-            document.body.style.removeProperty('overflow');
-            document.body.style.removeProperty('position');
-            document.body.style.removeProperty('top');
-            document.body.style.removeProperty('width');
-            window.scrollTo(0, scrollPosition);
-        }
 
         function toggleMobileMenu() {
             mobileToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
             mobileMenuOverlay.classList.toggle('active');
-
-            if (navLinks.classList.contains('active')) {
-                lockScroll();
-            } else {
-                unlockScroll();
-            }
         }
 
         function closeMobileMenu() {
             mobileToggle.classList.remove('active');
             navLinks.classList.remove('active');
             mobileMenuOverlay.classList.remove('active');
-            unlockScroll();
         }
 
         mobileToggle.addEventListener('click', toggleMobileMenu);
         mobileMenuOverlay.addEventListener('click', closeMobileMenu);
-
-        // Prevent ALL touch scrolling except inside menu
-        function preventScroll(e) {
-            if (navLinks.classList.contains('active')) {
-                if (!navLinks.contains(e.target)) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return false;
-                }
-            }
-        }
-
-        document.addEventListener('touchstart', preventScroll, { passive: false });
-        document.addEventListener('touchmove', preventScroll, { passive: false });
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

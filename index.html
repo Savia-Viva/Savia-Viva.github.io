@@ -57,15 +57,14 @@
             background-attachment: fixed, scroll, fixed;
             color: var(--brown-dark);
             line-height: 1.8;
-            /* Increased line height */
             font-size: 1.05rem;
-            /* Increased base font size */
             position: relative;
-            /* For absolute positioning of side panels */
+            overflow-x: hidden;
         }
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         .font-serif {
@@ -1550,7 +1549,8 @@
             flex-direction: column;
             gap: 5px;
             cursor: pointer;
-            z-index: 1001;
+            z-index: 1100;
+            position: relative;
         }
 
         .mobile-toggle span {
@@ -1558,6 +1558,41 @@
             height: 2px;
             background: var(--brown-dark);
             transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Hamburger animation when active */
+        .mobile-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(62, 39, 35, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+            opacity: 1;
+            pointer-events: auto;
         }
 
         /* Responsive Design */
@@ -1584,23 +1619,286 @@
                 position: fixed;
                 top: 0;
                 left: 0;
-                right: 0;
-                bottom: 0;
-                background: var(--cream);
+                width: 100%;
+                height: 100vh;
+                height: 100dvh;
+                /* Premium dark gradient with warm undertones */
+                background:
+                    radial-gradient(ellipse at top, rgba(166, 124, 82, 0.15) 0%, transparent 50%),
+                    radial-gradient(ellipse at bottom, rgba(166, 124, 82, 0.1) 0%, transparent 50%),
+                    linear-gradient(180deg,
+                        rgba(45, 28, 20, 0.98) 0%,
+                        rgba(62, 39, 35, 0.99) 30%,
+                        rgba(55, 35, 30, 0.99) 70%,
+                        rgba(45, 28, 20, 0.98) 100%);
+                backdrop-filter: blur(25px);
+                -webkit-backdrop-filter: blur(25px);
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                gap: 2rem;
+                gap: 0.3rem;
                 transform: translateX(100%);
-                transition: transform 0.4s ease;
+                transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 1050;
+                box-shadow:
+                    -15px 0 40px rgba(0, 0, 0, 0.4),
+                    inset 2px 0 0 rgba(166, 124, 82, 0.3);
+            }
+
+            .nav-links::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background:
+                    url('Img_Website/imag9.webp') center/cover,
+                    repeating-linear-gradient(45deg,
+                        transparent,
+                        transparent 2px,
+                        rgba(166, 124, 82, 0.02) 2px,
+                        rgba(166, 124, 82, 0.02) 4px);
+                opacity: 0.08;
+                pointer-events: none;
+            }
+
+            /* Decorative corner accents */
+            .nav-links::after {
+                content: '';
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                right: 20px;
+                bottom: 20px;
+                border: 1px solid rgba(166, 124, 82, 0.15);
+                border-radius: 20px;
+                pointer-events: none;
             }
 
             .nav-links.active {
                 transform: translateX(0);
             }
 
+            .nav-links li {
+                list-style: none;
+                opacity: 0;
+                transform: translateX(30px);
+                transition: all 0.3s ease;
+                position: relative;
+                z-index: 10;
+            }
+
+            .nav-links.active li {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            /* Staggered animation for all menu items */
+            .nav-links.active li:nth-child(1) {
+                transition-delay: 0.05s;
+            }
+
+            .nav-links.active li:nth-child(2) {
+                transition-delay: 0.1s;
+            }
+
+            .nav-links.active li:nth-child(3) {
+                transition-delay: 0.12s;
+            }
+
+            .nav-links.active li:nth-child(4) {
+                transition-delay: 0.14s;
+            }
+
+            .nav-links.active li:nth-child(5) {
+                transition-delay: 0.16s;
+            }
+
+            .nav-links.active li:nth-child(6) {
+                transition-delay: 0.18s;
+            }
+
+            .nav-links.active li:nth-child(7) {
+                transition-delay: 0.20s;
+            }
+
+            .nav-links.active li:nth-child(8) {
+                transition-delay: 0.22s;
+            }
+
+            .nav-links.active li:nth-child(9) {
+                transition-delay: 0.24s;
+            }
+
+            .nav-links.active li:nth-child(10) {
+                transition-delay: 0.26s;
+            }
+
+            .nav-links.active li:nth-child(11) {
+                transition-delay: 0.28s;
+            }
+
+            .nav-links.active li:nth-child(12) {
+                transition-delay: 0.30s;
+            }
+
             .nav-links a {
-                font-size: 1.2rem;
+                font-size: 1.6rem;
+                font-weight: 600;
+                font-family: 'Cormorant Garamond', serif;
+                color: var(--cream);
+                padding: 1rem 2.5rem;
+                position: relative;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                display: block;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+                cursor: pointer;
+                z-index: 100;
+                pointer-events: auto;
+            }
+
+            .nav-links a::after {
+                content: '';
+                position: absolute;
+                bottom: 5px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 0;
+                height: 1px;
+                background: linear-gradient(90deg, transparent, var(--gold), transparent);
+                transition: width 0.4s ease;
+            }
+
+            .nav-links a:hover::after,
+            .nav-links a:active::after {
+                width: 70%;
+            }
+
+            .nav-links a:hover,
+            .nav-links a:active {
+                color: var(--gold);
+                background: linear-gradient(135deg, rgba(166, 124, 82, 0.1), rgba(166, 124, 82, 0.05));
+                text-shadow: 0 0 20px rgba(166, 124, 82, 0.3);
+                transform: scale(1.02);
+            }
+
+            /* Mobile Menu Header */
+            .mobile-menu-header {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.6rem;
+                margin-bottom: 1rem;
+                padding: 1.5rem 2rem;
+                position: relative;
+            }
+
+            .mobile-menu-logo {
+                width: 90px;
+                height: 90px;
+                border-radius: 50%;
+                object-fit: contain;
+                border: 3px solid var(--gold);
+                box-shadow:
+                    0 0 0 6px rgba(45, 28, 20, 0.8),
+                    0 0 30px rgba(166, 124, 82, 0.4),
+                    0 8px 25px rgba(0, 0, 0, 0.3);
+                animation: logoGlow 3s ease-in-out infinite alternate;
+            }
+
+            @keyframes logoGlow {
+                0% {
+                    box-shadow: 0 0 0 6px rgba(45, 28, 20, 0.8), 0 0 20px rgba(166, 124, 82, 0.3), 0 8px 25px rgba(0, 0, 0, 0.3);
+                }
+
+                100% {
+                    box-shadow: 0 0 0 6px rgba(45, 28, 20, 0.8), 0 0 35px rgba(166, 124, 82, 0.5), 0 8px 25px rgba(0, 0, 0, 0.3);
+                }
+            }
+
+            .mobile-menu-brand {
+                font-family: 'Cormorant Garamond', serif;
+                font-size: 2rem;
+                font-weight: 600;
+                color: var(--cream);
+                letter-spacing: 0.15em;
+                font-style: italic;
+                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            }
+
+            .mobile-menu-tagline {
+                font-size: 0.65rem;
+                color: var(--gold);
+                letter-spacing: 0.25em;
+                text-transform: uppercase;
+                font-weight: 500;
+                text-shadow: 0 0 10px rgba(166, 124, 82, 0.3);
+            }
+
+            /* Decorative Divider */
+            .mobile-menu-divider {
+                width: 40%;
+                height: 1px;
+                background: linear-gradient(90deg,
+                        transparent,
+                        rgba(166, 124, 82, 0.6) 30%,
+                        var(--gold) 50%,
+                        rgba(166, 124, 82, 0.6) 70%,
+                        transparent);
+                margin: 0.6rem auto;
+                position: relative;
+            }
+
+            .mobile-menu-divider::before {
+                content: '◆';
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 0.5rem;
+                color: var(--gold);
+                background: rgba(45, 28, 20, 1);
+                padding: 0 0.5rem;
+            }
+
+            /* Social Icons */
+            .mobile-menu-social {
+                display: flex;
+                gap: 1.5rem;
+                margin-top: 0.5rem;
+            }
+
+            .mobile-menu-social a {
+                width: 44px;
+                height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid rgba(166, 124, 82, 0.4);
+                border-radius: 50%;
+                color: var(--cream);
+                font-size: 1.1rem;
+                transition: all 0.3s ease;
+                padding: 0;
+            }
+
+            .mobile-menu-social a:hover {
+                background: var(--gold);
+                color: var(--brown-dark);
+                border-color: var(--gold);
+                transform: translateY(-3px);
+            }
+
+            .mobile-menu-social a::after {
+                display: none;
+            }
+
+            /* Hide nav icons on mobile when menu not open */
+            .nav-icons {
+                display: none;
             }
 
             .hero-title {
@@ -2071,6 +2369,13 @@
         </div>
 
         <ul class="nav-links" id="navLinks">
+            <!-- Mobile Menu Header -->
+            <li class="mobile-menu-header">
+                <img src="Img_Website/Logo.webp" alt="Savia Viva" class="mobile-menu-logo">
+                <span class="mobile-menu-brand">Savia Viva</span>
+                <span class="mobile-menu-tagline">Cacao Premium Colombiano</span>
+            </li>
+            <li class="mobile-menu-divider"></li>
             <li><a href="#home">Inicio</a></li>
             <li><a href="#about">Nosotros</a></li>
             <li><a href="#varieties">Variedades</a></li>
@@ -2078,6 +2383,13 @@
             <li><a href="#experience">Experiencia</a></li>
             <li><a href="#mission">Misión</a></li>
             <li><a href="#contact">Contacto</a></li>
+            <li class="mobile-menu-divider"></li>
+            <!-- Social Links -->
+            <li class="mobile-menu-social">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </li>
         </ul>
 
         <div class="nav-icons">
@@ -2091,6 +2403,9 @@
             <span></span>
         </div>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -2617,10 +2932,25 @@
         // Mobile menu toggle
         const mobileToggle = document.querySelector('.mobile-toggle');
         const navLinks = document.querySelector('.nav-links');
+        const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
 
-        mobileToggle.addEventListener('click', () => {
+        function toggleMobileMenu() {
+            mobileToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
-        });
+            mobileMenuOverlay.classList.toggle('active');
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function closeMobileMenu() {
+            mobileToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        mobileToggle.addEventListener('click', toggleMobileMenu);
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2632,7 +2962,7 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
-                    navLinks.classList.remove('active');
+                    closeMobileMenu();
                 }
             });
         });
